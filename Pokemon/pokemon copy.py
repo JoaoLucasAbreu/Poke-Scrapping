@@ -3,10 +3,8 @@ import requests
 resposta = requests.get('https://pokeapi.co/api/v2/pokemon/charmander')
 
 #pkm_df = pd.DataFrame(data, columns=['Nome', 'Type1', 'Type2', 'HP', 'Attack', 'Defense', 'Img'])
-
-nome = []
 def main():
-    global pokemon
+    global poke
     pokemon = str(input('Pokémon: '))
     api = f'https://pokeapi.co/api/v2/pokemon/{pokemon}'
     res = requests.get(api)
@@ -14,15 +12,13 @@ def main():
     pegarNome(poke)
     pegarTipo(poke)
     
+def pegarNome(poke):
+    print(f'Nome: {poke["name"].upper()}')
 
 def pegarTipo(poke):
-    print(f'Tipo {pokemon}:')
+    print('Tipo:', end=" ")
     for i in poke['types']:
-        print(i['type']['name'])
-
-def pegarNome(poke):
-    print(f'Nome')
-    nome.append(poke['name'])
+        print(i['type']['name'].upper(), end=" ")
 
 if __name__ == '__main__':
     main()
